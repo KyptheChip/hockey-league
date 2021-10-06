@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam ClassAttributeIconSize 0
+
+class HockeyLeague {
+    -hockeyTeams : List<HockeyTeam>
+    -findTeamsWithSameCoach() : List<HockeyTeam>
+    -getTeamWithMostWins() : HockeyTeam
+    -printWinsForEachTeam() : void
+}
+
+class HockeyTeam {
+    -coach : Coach
+    -name : String
+    -wins : int
+    -gamesHistory : List<Game>
+    -players : List<Player>
+}
+
+class Player {
+    -name : String
+    -playerPosition : PlayerPosition
+    -number : int
+    -address : String
+}
+
+class Game {
+    -team1 : HockeyTeam
+    -team2 : HockeyTeam
+    -score1 : int
+    -score2 : int
+    -location : String
+}
+
+class Coach {
+    -name : String
+    -address : String
+    -accreditationLevel : AccreditationLevel
+    -yearsOfExperience : int
+}
+
+enum AccreditationLevel {
+    BEGINNER
+    SENIOR
+    EXPERT
+}
+
+enum PlayerPosition {
+    ATTACKER
+    DEFENDER
+    GOALKEEPER
+}
+
+HockeyLeague o-- HockeyTeam
+HockeyTeam o-- Player
+HockeyTeam o-- Coach
+Game o-- HockeyTeam
+HockeyLeague o-- Game
+Player --> PlayerPosition
+Coach --> AccreditationLevel
+
+@enduml
